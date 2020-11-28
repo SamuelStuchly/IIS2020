@@ -1,0 +1,86 @@
+{% extends 'HotelApp/index.html' %}
+{% block content %}  
+    {% if user.is_authenticated %}
+        
+        <!-- INSERT FORM TO CHANGE PROFILE INFO -->
+        
+        <!-- LOGGED USER -->>
+        <button type="button" class="collapsible">My reservations</button>
+        <div class="content">
+            {% for reserv in reservations %}    <!-- change according to the ORM, access of one user -->
+                <table>
+                    <tr>
+                        <td>Number: {{ reserv.id }}</td>
+                        <td>Price: {{ reserv.price }}</td>
+                        <td>Room: {{ reserv.room }}</td>
+                    </tr>
+                    <tr>
+                        <td>Starting date: {{ reserv.start }}</td>
+                        <td>Ending date: {{ reserv.end }}</td>
+                        <td>Active: {{ reserv.active }}</td>
+                    </tr>
+                </table>
+            {% endfor %}    
+        </div> 
+
+        <!-- RECEPTIONIST, role = 2 -->
+        {% if user.role > 1 %}
+        <button type="button" class="collapsible">My reservations</button>
+        <div class="content">
+            {% for reserv in reservations %}    <!-- change according to the ORM, access of one user -->
+                <table>
+                    <tr>
+                        <td>Number: {{ reserv.id }}</td>
+                        <td>Price: {{ reserv.price }}</td>
+                        <td>Room: {{ reserv.room }}</td>
+                    </tr>
+                    <tr>
+                        <td>Starting date: {{ reserv.start }}</td>
+                        <td>Ending date: {{ reserv.end }}</td>
+                        <td>Active: {{ reserv.active }}</td>
+                    </tr>
+                </table>
+                <button type="button">Save changes</button>
+                <!-- CONFIRM RESERVATION -->
+            {% endfor %}    
+        </div> 
+        {% endif %}
+
+
+        <!-- OWNER, role = 3 -->>
+        {% if user.role > 2 %}
+
+            <!-- TODO -->
+
+        {% endif %}
+
+
+        {% if user.is_superuser %}
+            <button type="button" class="collapsible">My reservations</button>
+            <div class="content">
+                <table>
+                {% for user in users %}    <!-- change according to the ORM, access of one user -->    
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role }}</td>
+                        <td align="center">  <!-- https://stackoverflow.com/questions/23018842/add-a-drop-down-in-a-table-using-html -->
+                            <select>
+                                <option value={{ user.role=1 }}> User </option>                                    
+                                <option value={{ user.role=2 }}> Receptionist </option>
+                                <option value={{ user.role=3 }}> Owner </option>
+                                <option value={{ user.role=4 }}> Admin
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>    
+            </div> 
+        {% endif %}
+    
+    {% else %}
+        <p> Log in to see your profile </p>
+        <!-- REDIRECT? -->
+    {% endif %}
+{% endblock content %}
