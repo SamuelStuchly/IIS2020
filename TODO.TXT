@@ -19,8 +19,8 @@ xsolte02:
 xstuch06:
 
     setup index template
-    Setup registration page 
-    setup login page 
+    Setup registration page -- DONE
+    setup login page  --- DONE
     create data -- based on part 5 just dictionary
     setup hotels view
     - view for hotels 
