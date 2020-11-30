@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import date
-from django.contrib.auth.models import User
+from users.models import CustomUser
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -14,7 +14,7 @@ class Hotel(models.Model):
     city = models.CharField(max_length=100)
     rating = models.DecimalField(max_digits=2, decimal_places=1)
     description = models.TextField()
-    owner = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL)
 
     # TODO: maybe add owner , ajked asi ne skor do owner class bude reference na owner a hotovo.
 
@@ -52,7 +52,7 @@ class Order(models.Model):
     created = models.DateField(auto_now_add=True)
     
     # if user is registered
-    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
     
     # if user is not registered
     name = models.CharField(max_length=100,blank=True)

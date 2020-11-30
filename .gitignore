@@ -136,3 +136,4 @@ startbootstrap-shop-homepage-gh-pages
 startbootstrap-shop-homepage-gh-pages.zip
 Hotel/users/migrations/
 Hotel/HotelApp/migrations/
+set_env_and_run_IIS_Django.sh
