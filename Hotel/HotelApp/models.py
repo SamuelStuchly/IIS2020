@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 
@@ -11,12 +13,16 @@ class Hotel(models.Model):
     city = models.CharField(max_length=100)
     rating = models.DecimalField(max_digits=2, decimal_places=1)
     description = models.TextField()
+    owner = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     # TODO: maybe add owner , ajked asi ne skor do owner class bude reference na owner a hotovo.
 
     def __str__(self):
         return self.name
     # 3 obrazky este 
+
+    def get_absolute_url(self):
+       return reverse('hotel-detail', kwargs={'pk': self.pk})
 
 class Room(models.Model):
     ROOM_TYPES = (
@@ -31,6 +37,7 @@ class Room(models.Model):
     price= models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     occupied = models.BooleanField(default=False)
+    number = models.PositiveIntegerField()
 
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
 
@@ -41,6 +48,7 @@ class Room(models.Model):
 class Order(models.Model):
     deposit = models.DecimalField(max_digits=10, decimal_places=2)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    created = models.DateTimeField(default=timezone.now)
     
     # if user is registered
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
@@ -49,6 +57,7 @@ class Order(models.Model):
     name = models.CharField(max_length=100,blank=True)
     surname = models.CharField(max_length=100,blank=True)
     email = models.EmailField(blank=True) 
+    phone = PhoneNumberField(blank=True)
 
     #TODO: sholtikovi povedat nech zmenime diagram
 
@@ -59,8 +68,9 @@ class Reservation(models.Model):
     to_date = models.DateField()
     active = models.BooleanField(default=True)
 
-    room = models.ManyToManyField(Room)
+    
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
     
     # TODO zmena do ER connection rezervace a user 
 
