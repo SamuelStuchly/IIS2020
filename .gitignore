@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+#my own files
+useful_links.txt
+.gitignore
+startbootstrap-shop-homepage-gh-pages
+startbootstrap-shop-homepage-gh-pages.zip
+Hotel/users/migrations/
+Hotel/HotelApp/migrations/

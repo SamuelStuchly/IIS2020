@@ -1,5 +1,58 @@
 {% extends 'HotelApp/index.html' %}
 {% block content %}
-    <p> anoooooooooooooooooooooo</p>
-    <h1> fuck off mate</h1>
+{% load mathfilters %}
+{% load crispy_forms_tags %}
+
+
+
+      <div class="row">
+
+      <div class="col-lg-3">
+        <h1 class="my-4">List of Hotels</h1>
+        <form method="GET">
+        {{ filter.form|crispy }}
+        <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
+      
+
+      </div>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-9">
+
+       <div class="row">
+
+       {% for hotel in filter.qs %}
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="{% url 'hotel-detail' hotel.id %}">{{ hotel.name }}</a>
+                </h4>
+                <h5>City: {{ hotel.city }}</h5>
+                <h5>Rating: {{ hotel.rating }}/5</h5>
+                <p class="card-text">{{hotel.description}}</p>
+              </div>
+              <div class="card-footer">
+              {% with ''|center:hotel.stars as range %}
+              {% for i in range %}
+                <strong style="color:Gold;">&#9733;</strong>
+              {% endfor %}
+              {% endwith %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+        </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
 {% endblock content %}
