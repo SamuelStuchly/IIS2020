@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
@@ -8,10 +8,11 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Hotel, Room, Reservation, Order
-from .filters import HotelFilter,RoomFilter
+from .filters import HotelFilter,RoomFilter, OrderFilter, ReservationFilter
 
 
 def about(request):
+    print(request)
     return render(request,'HotelApp/about.html')
 
 
@@ -119,5 +120,46 @@ class RoomDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-#
+## ======== Order views ========= #
 
+
+class OrderListView(ListView):
+    model = Order
+    # template_name = 'users/order_list.html'  # <app>/<model>_<viewtype>.html
+    # context_object_name = 'Orders'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(OrderListView, self).get_context_data(*args, **kwargs)
+        context['filter'] = OrderFilter(self.request.GET,queryset=self.get_queryset())
+        print(context)
+        return context
+
+class OrderDetailView(DetailView):
+    model = Order
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(OrderDetailView, self).get_context_data(*args, **kwargs)
+        context['Reservations'] = Reservation.objects.filter(order=self.get_object())
+        print(self.get_queryset())
+        return context
+
+
+def add_reservation(request,order):
+    
+
+    return redirect('order-list')   
+
+
+def remove_reservation(request,res):
+    
+
+    return redirect('order-list')   
+
+
+def create_order(request,res):
+    
+    return redirect('order-list')   
+
+def remove_order(request,order):
+
+    return redirect('order-list')   

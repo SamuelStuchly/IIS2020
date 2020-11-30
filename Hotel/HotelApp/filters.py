@@ -1,6 +1,7 @@
 import django_filters
-from .models import Hotel,Room
+from .models import Hotel,Room, Order,Reservation
 from sys import maxsize
+
 
 class HotelFilter(django_filters.FilterSet):
 
@@ -64,3 +65,46 @@ class RoomFilter(django_filters.FilterSet):
             qset = queryset.filter(price__range=[100,maxsize])
         
         return qset
+
+
+
+
+
+class OrderFilter(django_filters.FilterSet):
+
+    class Meta:
+        model = Order
+        fields = ()
+       
+
+    CHOICES = (
+        ('asc','Ascending'),
+        ('desc','Descending')
+    )
+
+    ordering_created = django_filters.ChoiceFilter(label='Ordering by date created', choices=CHOICES, method='filter_by_order')
+    ordering_price = django_filters.ChoiceFilter(label='Ordering by price', choices=CHOICES, method='filter_by_order')
+    ordering_deposit = django_filters.ChoiceFilter(label='Ordering by deposit', choices=CHOICES, method='filter_by_order')
+    
+    def filter_by_order(self,queryset,name,value):
+        
+        expression = 'created' if value == 'asc' else '-created'
+        return queryset.order_by(expression)
+    
+    def filter_by_price(self,queryset,name,value):
+    
+        expression = 'price' if value == 'asc' else '-price'
+        return queryset.order_by(expression)
+    
+    
+    def filter_by_deposit(self,queryset,name,value):
+    
+        expression = 'deposit' if value == 'asc' else '-deposit'
+        return queryset.order_by(expression)
+
+
+class ReservationFilter(django_filters.FilterSet):
+
+    class Meta:
+        model = Reservation
+        fields = ()

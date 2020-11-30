@@ -1,0 +1,16 @@
+{% extends 'HotelApp/index.html' %} {% block content %} {% load mathfilters %}
+{% load crispy_forms_tags %} 
+
+{% for res in Reservations %}
+<div>
+<h3>Room number: {{ res.room.number }}</h3>
+<h5>Oveall pricee: {{ res.price }}</h5>
+<h5>Requieried deposit: {{ res.deposit }}</h5>
+<h5>Date from: {{ res.from_date }}</h5>
+<h5>Date to: {{ res.to_date }}</h5>
+</div>
+
+<a href="{% url 'res-delete' res %}" class="btn btn-outline-info" >Delete</a>
+
+{% endfor %} 
+{% endblock content %}

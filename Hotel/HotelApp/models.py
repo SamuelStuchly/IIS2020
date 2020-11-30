@@ -1,14 +1,15 @@
 from django.db import models
-from django.utils import timezone
+from datetime import date
 from django.contrib.auth.models import User
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 
 
 
+
 class Hotel(models.Model):
     name = models.CharField(max_length=100)
-    stars = models.IntegerField()
+    stars = models.PositiveIntegerField()
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     rating = models.DecimalField(max_digits=2, decimal_places=1)
@@ -33,7 +34,7 @@ class Room(models.Model):
         ('T', 'Twin'),
     )
     room_type = models.CharField(max_length=1, choices=ROOM_TYPES, default='S')
-    beds_number = models.IntegerField()
+    beds_number = models.PositiveIntegerField()
     price= models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     occupied = models.BooleanField(default=False)
@@ -48,7 +49,7 @@ class Room(models.Model):
 class Order(models.Model):
     deposit = models.DecimalField(max_digits=10, decimal_places=2)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    created = models.DateTimeField(default=timezone.now)
+    created = models.DateField(auto_now_add=True)
     
     # if user is registered
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
@@ -73,6 +74,7 @@ class Reservation(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     
     # TODO zmena do ER connection rezervace a user 
+
 
 
 
