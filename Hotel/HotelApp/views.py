@@ -11,14 +11,6 @@ from .models import Hotel, Room, Reservation, Order
 from .filters import HotelFilter,RoomFilter
 
 
-# Create your views here.
-# def home(request):
-#     context = {
-#         'Hotels': Hotel.objects.all()
-#     }
-#     return render(request,'HotelApp/home.html',context)
-
-
 def about(request):
     return render(request,'HotelApp/about.html')
 
@@ -86,21 +78,9 @@ class HotelDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 # ======== ROOM views ========= #
 
-# class RoomListView(ListView):
-#     model = Room
-#     template_name = 'HotelApp/rooms_list.html'  # <app>/<model>_<viewtype>.html
-#     context_object_name = 'Rooms'
-#     # ordering = ['-date_posted']
-#     # chnaged
 
 class RoomDetailView(DetailView):
     model = Room
-
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super(RoomDetailView, self).get_context_data(*args, **kwargs)
-    #     context['Rooms'] = Room.objects.filter(hotel=self.get_object())_
-    #     return context
-
 
 #TODO
 class RoomCreateView(LoginRequiredMixin, CreateView):
@@ -139,104 +119,5 @@ class RoomDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-# # ======== Order views ========= #
-
-# class OrderListView(ListView):
-#     model = Order
-#     template_name = 'OrderApp/home.html'  # <app>/<model>_<viewtype>.html
-#     context_object_name = 'Orders'
-#     # ordering = ['-date_posted']
-#     # chnaged
-
-# class OrderDetailView(DetailView):
-#     model = Order
-
-# #TODO
-# class OrderCreateView(LoginRequiredMixin, CreateView):
-#     model = Order
-#     fields = ['title', 'content']
-
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
-
-
-# #TODO
-# class OrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-#     model = Order
-#     fields = ['title', 'content']
-
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
-
-#     def test_func(self):
-#         post = self.get_object()
-#         if self.request.user == post.author:
-#             return True
-#         return False
-
-# #TODO
-# class OrderDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-#     model = Order
-#     success_url = '/'
-
-#     def test_func(self):
-#         post = self.get_object()
-#         if self.request.user == post.author:
-#             return True
-#         return False
-
-# # ======== RESERVATION views ========= #
-
-
-# class ReservationListView(ListView):
-#     model = Reservation
-#     template_name = 'ReservationApp/home.html'  # <app>/<model>_<viewtype>.html
-#     context_object_name = 'Reservations'
-#     # ordering = ['-date_posted']
-#     # chnaged
-
-# class ReservationDetailView(DetailView):
-#     model = Reservation
-
-# #TODO
-# class ReservationCreateView(LoginRequiredMixin, CreateView):
-#     model = Reservation
-#     fields = ['title', 'content']
-
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
-
-
-# #TODO
-# class ReservationUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-#     model = Reservation
-#     fields = ['title', 'content']
-
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
-
-#     def test_func(self):
-#         post = self.get_object()
-#         if self.request.user == post.author:
-#             return True
-#         return False
-
-# #TODO
-# class ReservationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-#     model = Reservation
-#     success_url = '/'
-
-#     def test_func(self):
-#         post = self.get_object()
-#         if self.request.user == post.author:
-#             return True
-#         return False
-
-# # ======== USERS views ========= #
-
-# # TODO: should be in users.views 
+#
 
