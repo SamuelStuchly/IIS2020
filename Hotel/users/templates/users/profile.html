@@ -5,8 +5,23 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">User profile</legend>
-                <p>Update your profile information here</p>
+                <legend class="border-bottom mb-4">Update your profile information here</legend>
+                <p>Current email: {{ user.email }} </p>
+                <p>Joined: {{ user.date_joined }} </p>
+                <p> Current roles: </p>
+                <table>    
+                <tr>
+                    <th>Receptionist</th>
+                    <th>Owner</th>
+                    <th>Admin</th>
+                </tr>
+                <tr>
+                    <td>{% if user.is_staff %} &#10004 {% endif %} </td>
+                    <td>{% if user.is_owner %} &#10004 {% endif %} </td>
+                    <td>{% if user.is_superuser %} &#10004 {% endif %} </td>
+                </tr>
+                    
+                </table>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">

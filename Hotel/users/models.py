@@ -1,5 +1,6 @@
 
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
@@ -14,6 +15,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_owner = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
+    address = models.TextField(verbose_name="address")
+    telephone = PhoneNumberField()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

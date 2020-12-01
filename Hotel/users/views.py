@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth.decorators import login_required
@@ -47,9 +47,10 @@ class UserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 #TODO:permissons vsade 
 class UserCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = CustomUser
-    fields = ['email', 'password']
+    fields = ['email']
 
     # TODO heslo na prihlasovanie
+
 
     """
     def form_valid(self, form):
@@ -68,7 +69,9 @@ class UserCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = CustomUser
-    fields = ['email']
+    fields = ['email', 'is_staff', 'is_owner', 'is_superuser']
+    
+    success_url = "/"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -90,6 +93,19 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False 
 
+
+@login_required
+def createnew(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Acount has been created.')
+            return redirect('customuser')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'users/customuser_create.html', {'form': form})
 
 
 def register(request):

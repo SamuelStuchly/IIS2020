@@ -1,5 +1,6 @@
 from django.urls import path 
 from . import views
+from users.views import createnew
 from .views import (
     HotelListView,
     HotelDetailView,
@@ -35,7 +36,7 @@ urlpatterns = [
     path('', HotelListView.as_view(),name='HotelApp-home'),
     path('customuser/', UserListView.as_view(), name='customuser'),
     path('customuser/<int:pk>/', UserDetailView.as_view(), name='customuser-detail'),
-    path('customuser/new/', UserCreateView.as_view(), name='customuser-create'),
+    path('customuser/new/', createnew, name='customuser-create'),
     path('customuser/<int:pk>/update', UserUpdateView.as_view(), name='customuser-update'),
     path('customuser/<int:pk>/delete', UserDeleteView.as_view(), name='customuser-delete'),
     

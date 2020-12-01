@@ -11,7 +11,7 @@
     {{ filter.form|crispy }}
     <button type="submit" class="btn btn-primary">Search</button>
     </form>
-
+    <br>
     <form action="{% url 'customuser-create' %}">
     <button type="submit" class="btn btn-primary">Add user</button>
     </form>
@@ -20,22 +20,22 @@
 
     <div class="col-lg-4">
     <h1 class="my-4">Users</h1>
-    <table style="table"> 
+    <table class="table"> 
         <tr>
-          <th>Email</th>
-          <th>Receptionist</th>
-          <th>Owner</th>
-          <th>Admin</th>
+          <th class="th text-center">Email</th>
+          <th class="th text-center">Receptionist</th>
+          <th class="th text-center">Owner</th>
+          <th class="th text-center">Admin</th>
         </tr>
         {% for usr in filter.qs %}
           <tr>
             <td>
             <div class="col-sm-8">  
             <a href="{% url 'customuser-detail' usr.id %}">{{ usr.email }}</a>
-            <td>          
-            <td>{{ usr.is_staff }} </td>
-            <td>{{ usr.is_owner }} </td>
-            <td>{{ usr.is_superuser }} </td>
+            </td>          
+            <td class="td text-center">{% if usr.is_staff %} &#10004 {% endif %} </td>
+            <td class="td text-center">{% if usr.is_owner %} &#10004 {% endif %} </td>
+            <td class="td text-center">{% if usr.is_superuser %} &#10004 {% endif %} </td>
           
             </div>
           </tr>
