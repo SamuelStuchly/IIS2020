@@ -15,11 +15,13 @@ from .views import (
 
     OrderListView,
     OrderDetailView,
+    OrderDeleteView,
     
-    add_reservation,
-    remove_reservation,
-    create_order,
-    remove_order
+    ReservationCreateView,
+    ReservationDeleteView,
+    OrderFinishRegisteredView,
+    OrderFinishUnRegisteredView
+    
 
     
 )
@@ -51,9 +53,13 @@ urlpatterns = [
     path('hotel/<int:pk>/delete/', HotelDeleteView.as_view(), name='hotel-delete'),
     path('hotel/<int:pk>/room/<int:id>/delete/', RoomDeleteView.as_view(), name='room-delete'),
     
-    path('order/create/', create_order ,name='order-create'),
-    path('order/delete/', remove_order ,name='order-delete'),
-    path('res/add/', add_reservation ,name='res-add'),
-    path('res/delete/', remove_reservation ,name='res-delete'),
+    # path('order/create/', create_order ,name='order-create'),
+    path('order/delete/', OrderDeleteView.as_view() ,name='order-delete'),
+    path('hotel/<int:pk>/room/<int:id>/res/add/', ReservationCreateView.as_view() ,name='res-add'),
+    path('hotel/<int:pk>/room/<int:id>/res<int:r_id>/delete/', ReservationDeleteView ,name='res-delete'),
+
+    path('order/<int:pk>/registered/finish/', OrderFinishRegisteredView.as_view(), name='order-finish-registered'),
+    path('order/<int:pk>/unregistered/finish/', OrderFinishUnRegisteredView.as_view(), name='order-finish-unregistered'),
     path('about/', views.about,name='HotelApp-about'),
+    path('success/', views.success,name='HotelApp-about'),
 ]

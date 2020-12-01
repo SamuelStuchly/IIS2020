@@ -9,7 +9,11 @@
 <h5>Date to: {{ res.to_date }}</h5>
 </div>
 
-<a href="{% url 'res-delete' res %}" class="btn btn-outline-info" >Delete</a>
+<a href="{% url 'res-delete' res.room.hotel.id res.room.id res.id %}" class="btn btn-danger" >Delete</a>
+<a href="{% url 'hotel-detail' res.room.hotel.id  %}" class="btn btn-outline-info" >Next reservation</a>
+<a href="{% url 'order-finish-registered' res.order.id%}" class="btn btn-outline-info" > Log In and Finish Order </a>
+<a href="{% url 'order-finish-registered' res.order.id%}" class="btn btn-outline-info" > Finish Order </a>
+<a href="{% url 'order-finish-unregistered' res.order.id%}" class="btn btn-outline-info" > Finish Order without login </a>
 
 {% endfor %} 
 {% endblock content %}

@@ -60,14 +60,15 @@ class Order(models.Model):
     surname = models.CharField(max_length=100,blank=True)
     email = models.EmailField(blank=True) 
     phone = PhoneNumberField(blank=True)
+    
 
     #TODO: sholtikovi povedat nech zmenime diagram
 
 class Reservation(models.Model):
     
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    from_date = models.DateField()
-    to_date = models.DateField()
+    from_date = models.DateField("From date: (format: MM/DD/YY)")
+    to_date = models.DateField("From date: (format: MM/DD/YY)")
     active = models.BooleanField(default=True)
 
     
