@@ -1,1 +1,1 @@
-web: python Hotel/manage.py rumnerver 0.0.0.0:5000
+web: gunicorn --pythonpath Hotel Hotel.wsgi
