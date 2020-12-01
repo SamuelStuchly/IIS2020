@@ -2,10 +2,13 @@ xsolte02:
 
     create database diagram -- DONE
     create use case diagram  -- DONE
-    write mail to Hynek :) to find oout if to host on heroku or eva
-    configure user types
-    setup admin template  --- for all editing pages
-    setup admin page for editing users 
+    write mail to Hynek :) to find oout if to host on heroku or eva  --- DONE
+    configure user types -- DONE
+    setup admin template  --- for all editing pages  -- DONE
+    setup admin page for editing users  -- DONE
+    profile page 
+    django-session-security !!!!!!!!!!!!!! ---- DONE
+
  
         
 
@@ -33,7 +36,7 @@ xstuch06:
     setup image storing into S3 !!!!!!
     set starrating with https://django-star-ratings.readthedocs.io/en/latest/ or just remove rating overall :) --- DROPPED
     add NO RESULTS screen to filters 
-    django-session-security !!!!!!!!!!!!!! ----
+    
 
     
 

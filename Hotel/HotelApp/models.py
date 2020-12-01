@@ -50,6 +50,7 @@ class Order(models.Model):
     deposit = models.DecimalField(max_digits=10, decimal_places=2)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     created = models.DateField(auto_now_add=True)
+    active = models.BooleanField(default=False)
     
     # if user is registered
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
@@ -63,7 +64,7 @@ class Order(models.Model):
     #TODO: sholtikovi povedat nech zmenime diagram
 
 class Reservation(models.Model):
-    deposit = models.DecimalField(max_digits=10, decimal_places=2)
+    
     price = models.DecimalField(max_digits=10, decimal_places=2)
     from_date = models.DateField()
     to_date = models.DateField()

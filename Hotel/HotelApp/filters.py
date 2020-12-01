@@ -5,7 +5,7 @@ from sys import maxsize
 
 class HotelFilter(django_filters.FilterSet):
 
-    stars = django_filters.NumberFilter(field_name='price')
+    # stars = django_filters.NumberFilter(field_name='stars')
     class Meta:
         model = Hotel
         fields = {
