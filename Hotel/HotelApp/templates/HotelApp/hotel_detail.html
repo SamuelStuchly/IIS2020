@@ -96,7 +96,7 @@
         <button type="submit" class="btn btn-primary">Filter</button>
         </form>
         <div>     
-            <a class="btn btn-primary mt-2 " href="{% url 'room-create' hotel.id %}">Add Room</a>
+            <a class="btn btn-primary mt-2 " href="{% url 'room-create' object.id %}">Add Room</a>
         </div>
     </div>
   </div>
@@ -110,7 +110,7 @@
         /></a>
         <div class="card-body">
           <h4 class="card-title">
-            <a href="{% url 'room-detail' hotel.id room.id %}">{{ room.room_type }}</a>
+            <a href="{% url 'room-detail' object.id room.id %}">{{ room.room_type }}</a>
           </h4>
           <h5>City: {{ hotel.bedsnumber }}</h5>
           <h5>Rating: {{ hotel.rating }}/5</h5>

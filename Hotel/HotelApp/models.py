@@ -25,8 +25,8 @@ class Hotel(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-       return reverse('hotel-detail', kwargs={'pk': self.pk})
+    # def get_absolute_url(self):
+    #    return reverse('hotel-detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -45,7 +45,7 @@ class Room(models.Model):
     price= models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     occupied = models.BooleanField(default=False)
-    number = models.PositiveIntegerField()
+    
 
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
 

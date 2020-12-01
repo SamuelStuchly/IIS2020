@@ -49,10 +49,12 @@ class HotelCreateView(LoginRequiredMixin, CreateView):
     fields = ['name', 'stars', 'rating', 'address', 'city', 'description', 'image1', 'image2', 'image3']
 
     def form_valid(self, form):
-        
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
+    def get_success_url(self):
+           print("IDEM NA SUCCES URL ")
+           return reverse('HotelApp-home')
 
 
 class HotelUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -85,24 +87,26 @@ class HotelDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class RoomDetailView(DetailView):
     model = Room
+    template_name = "HotelApp/room_detail.html"  
 
-#TODO
+
 class RoomCreateView(LoginRequiredMixin, CreateView):
     model = Room
-    fields = ['number','room_type', 'beds_number', 'price' , 'description', 'image']
+    fields = ['room_type', 'beds_number', 'price' , 'description', 'image']
+    success_url = '/'
 
     def form_valid(self, form):
         form.instance.hotel = Hotel.objects.get(pk=self.kwargs['pk'])
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse('hotel-detail',kwargs=self.kwargs )
+    
 
 
 #TODO
 class RoomUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Room
-    fields = ['number','room_type', 'beds_number', 'price' , 'description', 'occupied', 'image']
+    fields = ['room_type', 'beds_number', 'price' , 'description', 'occupied', 'image']
+
 
     def form_valid(self, form):
         # form.instance.hotel.owner = self.request.user
@@ -115,6 +119,9 @@ class RoomUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
+    def get_success_url(self):
+        return reverse('hotel-detail',kwargs={'pk':self.kwargs['pk']})
+
 #TODO
 class RoomDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Room
@@ -125,6 +132,7 @@ class RoomDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user.is_superuser or self.request.user == room.hotel.owner:
             return True
         return False
+        
 
 
 ## ======== Order views ========= #
