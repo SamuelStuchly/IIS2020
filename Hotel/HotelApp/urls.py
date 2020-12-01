@@ -61,5 +61,5 @@ urlpatterns = [
     path('order/<int:pk>/registered/finish/', OrderFinishRegisteredView.as_view(), name='order-finish-registered'),
     path('order/<int:pk>/unregistered/finish/', OrderFinishUnRegisteredView.as_view(), name='order-finish-unregistered'),
     path('about/', views.about,name='HotelApp-about'),
-    path('success/', views.success,name='HotelApp-about'),
+    path('success/', views.success,name='order-success'),
 ]

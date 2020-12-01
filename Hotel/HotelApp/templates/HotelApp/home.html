@@ -12,7 +12,9 @@
         <form method="GET">
         {{ filter.form|crispy }}
         <button type="submit" class="btn btn-primary">Search</button>
+        {% if user.is_superuser or user.is_owner  %}
         <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'hotel-create' %}">Add new Hotel</a>
+         {% endif %}
         </form>
         
       

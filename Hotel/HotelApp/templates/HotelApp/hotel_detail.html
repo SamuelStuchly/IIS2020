@@ -84,8 +84,11 @@
     <!-- /.row -->
 
           <div>     
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hotel-update' object.id %}">Update</a>
+           {% if user.is_superuser or user.is_owner  %}
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hotel-update' object.id %}">Update</a>
             <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'hotel-delete' object.id %}">Delete</a>
+          {% endif %}
+            
           </div>
 
 <div class="row">
@@ -96,7 +99,9 @@
         <button type="submit" class="btn btn-primary">Filter</button>
         </form>
         <div>     
+        {% if user.is_superuser or user.is_owner  %}
             <a class="btn btn-primary mt-2 " href="{% url 'room-create' object.id %}">Add Room</a>
+        {% endif %}
         </div>
     </div>
   </div>

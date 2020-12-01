@@ -24,9 +24,17 @@
     <!-- /.row -->
 
           <div> 
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'res-add' object.id  %}">Reserve this room</a>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'room-update' object.id  %}">Update</a>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'res-add' object.id  %}">Reserve this room</a>
+          {% if user.is_staff %}
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'room-update' object.id  %}">Update</a>
+          {% endif %}
+          {% if user.is_superuser or user.is_owner  %}
+           
             <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'room-delete' object.id %}">Delete</a>
+          {% endif %}
+            
+            
+
           </div>
 
 
