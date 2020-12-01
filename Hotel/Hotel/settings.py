@@ -83,12 +83,12 @@ WSGI_APPLICATION = 'Hotel.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'iis_db',
-        'USER': 'gazda',
-        'PASSWORD': os.environ['IIS_DB_PSSWD'],
-        'HOST': 'iis-db-instance.cux1erificun.us-east-1.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'd8gk39c3ehtp4',
+        'USER': 'jehksyngooutka',
+        'PASSWORD': os.environ.get('DB_PSSWD'),
+        'HOST': 'ec2-54-84-98-18.compute-1.amazonaws.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '5432',
     }
 }
 
