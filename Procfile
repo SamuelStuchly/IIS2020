@@ -1,1 +1,1 @@
-gunicorn --pythonpath Hotel Hotel.wsgi
+web: gunicorn --pythonpath Hotel Hotel.wsgi
