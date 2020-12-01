@@ -81,17 +81,23 @@ WSGI_APPLICATION = 'Hotel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+#         'NAME': 'd8gk39c3ehtp4',
+#         'USER': 'jehksyngooutka',
+#         'PASSWORD': os.environ.get('DB_PSSWD'),
+#         'HOST': 'ec2-54-84-98-18.compute-1.amazonaws.com',   # Or an IP Address that your DB is hosted on
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'd8gk39c3ehtp4',
-        'USER': 'jehksyngooutka',
-        'PASSWORD': os.environ.get('DB_PSSWD'),
-        'HOST': 'ec2-54-84-98-18.compute-1.amazonaws.com',   # Or an IP Address that your DB is hosted on
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 
 # Password validation
