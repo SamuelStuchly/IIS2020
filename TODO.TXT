@@ -6,10 +6,8 @@ xsolte02:
     configure user types
     setup admin template  --- for all editing pages
     setup admin page for editing users 
-    if Hynek:
-        host on eva 
-    else :
-        setup Heroku 
+ 
+        
 
 
 
@@ -18,22 +16,25 @@ xstuch06:
     setup index template
     Setup registration page -- DONE
     setup login page  --- DONE
-    create data -- based on part 5 just dictionary
+    create data -- based on part 5 just dictionary -- not necessary -- DROPPED
     setup hotels view -- DONE
     - view for hotels -- DONE
     - view for one hotel aka alll rooms view --DONE
     setup pages for editing hotels --- list of owned hotels  --- DONE
     setup page for editing one hotel --- hotel information followed by list of room types --- DONE
     setup page for editing one room  --- edit details for room type --- DONE
-    for all these views setup filtering 
-    setup shopping cart
-    setup page for rezervation cofirmation or edit  - nahradzes detaily ked nesi prihlaseny 
+    for all these views setup filtering --- DONE
+    setup shopping cart!!!!!!!!!!!
+    setup page for rezervation cofirmation or edit  - nahradzes detaily ked nesi prihlaseny  !!!!!!
     setup database on AWS -- DONE
     write databasee into django ---  DONE
-    setup S3 
-    setup image storing into S3
-    set starrating with https://django-star-ratings.readthedocs.io/en/latest/ or just remove rating overall :)
-    add NO RESULTS screen to filters
+    setup Heroku ---- DONE
+    setup S3 !!!!!!!!!
+    setup image storing into S3 !!!!!!
+    set starrating with https://django-star-ratings.readthedocs.io/en/latest/ or just remove rating overall :) --- DROPPED
+    add NO RESULTS screen to filters 
+    django-session-security !!!!!!!!!!!!!! ----
+
     
 
 
