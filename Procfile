@@ -1,1 +1,2 @@
-web: gunicorn Hotel.wsgi
+
+web: gunicorn_django --pythonpath=Hotel/ 
