@@ -44,7 +44,7 @@ class HotelDetailView(DetailView):
 #TODO:permissons vsade 
 class HotelCreateView(LoginRequiredMixin, CreateView):
     model = Hotel
-    fields = ['name', 'stars', 'address', 'city', 'description']
+    fields = ['name', 'stars', 'rating', 'address', 'city', 'description']
 
     def form_valid(self, form):
         form.instance.owner = self.request.user

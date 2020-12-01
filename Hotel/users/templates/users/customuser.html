@@ -1,0 +1,50 @@
+{% extends 'HotelApp/index.html' %}
+{% block content %}
+{% load mathfilters %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+
+    <div class="col-lg-3 y-2">
+    
+    <form method="GET">
+    {{ filter.form|crispy }}
+    <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <form action="{% url 'customuser-create' %}">
+    <button type="submit" class="btn btn-primary">Add user</button>
+    </form>
+    
+    </div>
+
+    <div class="col-lg-4">
+    <h1 class="my-4">Users</h1>
+    <table style="table"> 
+        <tr>
+          <th>Email</th>
+          <th>Receptionist</th>
+          <th>Owner</th>
+          <th>Admin</th>
+        </tr>
+        {% for usr in filter.qs %}
+          <tr>
+            <td>
+            <div class="col-sm-8">  
+            <a href="{% url 'customuser-detail' usr.id %}">{{ usr.email }}</a>
+            <td>          
+            <td>{{ usr.is_staff }} </td>
+            <td>{{ usr.is_owner }} </td>
+            <td>{{ usr.is_superuser }} </td>
+          
+            </div>
+          </tr>
+          
+        {% endfor %}
+    </table>    
+    </div>    
+  
+
+</div>
+
+{% endblock content %}

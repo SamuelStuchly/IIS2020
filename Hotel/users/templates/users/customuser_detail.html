@@ -1,0 +1,14 @@
+{% extends 'HotelApp/index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <p>Email: {{ object.email }}</p>
+    <p>Last login: {{ object.last_login }} </p>
+    <p>Joined: {{ object.date_joined }} </p>
+    <p>Receptionist: {{ object.is_staff }} </p>
+    <p>Owner: {{ object.is_owner }} </p>
+    <p>Admin: {{ object.is_superuser }} </p>
+    <div>     
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'customuser-update' object.id %}">Update</a>
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'customuser-delete' object.id %}">Delete</a>
+    </div>
+{% endblock content %}

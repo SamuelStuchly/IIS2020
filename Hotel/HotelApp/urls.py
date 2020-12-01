@@ -22,9 +22,23 @@ from .views import (
 
     
 )
+from users.views import (
+    UserListView,
+    UserDetailView,
+    UserCreateView,
+    UserUpdateView,
+    UserDeleteView
+)
+
 
 urlpatterns = [
     path('', HotelListView.as_view(),name='HotelApp-home'),
+    path('customuser/', UserListView.as_view(), name='customuser'),
+    path('customuser/<int:pk>/', UserDetailView.as_view(), name='customuser-detail'),
+    path('customuser/new/', UserCreateView.as_view(), name='customuser-create'),
+    path('customuser/<int:pk>/update', UserUpdateView.as_view(), name='customuser-update'),
+    path('customuser/<int:pk>/delete', UserDeleteView.as_view(), name='customuser-delete'),
+    
     path('orders/', OrderListView.as_view(), name='order-list'),
     path('hotel/<int:pk>/', HotelDetailView.as_view(), name='hotel-detail'),
     path('room/<int:pk>/', RoomDetailView.as_view(), name='room-detail'),
