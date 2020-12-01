@@ -1,2 +1,1 @@
-echo "IM working"
-web: gunicorn --pythonpath Hotel Hotel.wsgi
+web: python Hotel/manage.py rumnerver 0.0.0.0:5000
