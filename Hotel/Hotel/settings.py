@@ -22,15 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-SECRET_KEY = 'p@f+0p7#4rus+uh$84zzs3dmluyf2=6f^x5#7y5&6fi$%_2u3l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['iis2020-hotelapp.herokuapp.com']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['iis2020-hotelapp.herokuapp.com']
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -87,6 +86,7 @@ WSGI_APPLICATION = 'Hotel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# production use, heroku uses this 
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
@@ -98,6 +98,7 @@ WSGI_APPLICATION = 'Hotel.wsgi.application'
 #     }
 # }
 
+# for development locally 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
