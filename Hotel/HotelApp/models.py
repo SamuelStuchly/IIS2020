@@ -16,14 +16,21 @@ class Hotel(models.Model):
     description = models.TextField()
     owner = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL)
 
+    image1 = models.ImageField(default='default.jpg', upload_to='pics')
+    image2 = models.ImageField(default='default.jpg', upload_to='pics')
+    image3 = models.ImageField(default='default.jpg', upload_to='pics')
+
     # TODO: maybe add owner , ajked asi ne skor do owner class bude reference na owner a hotovo.
 
     def __str__(self):
         return self.name
-    # 3 obrazky este 
 
     def get_absolute_url(self):
        return reverse('hotel-detail', kwargs={'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
 
 class Room(models.Model):
     ROOM_TYPES = (
@@ -42,8 +49,11 @@ class Room(models.Model):
 
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
 
-    # image = models.ImageField()
+    image = models.ImageField(default='default.jpg', upload_to='pics')
     # TODO: pridat obrazok polda typu izby a hotela
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
 
 class Order(models.Model):

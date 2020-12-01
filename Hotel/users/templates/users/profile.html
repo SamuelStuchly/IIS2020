@@ -9,16 +9,16 @@
                 <p>Current email: {{ user.email }} </p>
                 <p>Joined: {{ user.date_joined }} </p>
                 <p> Current roles: </p>
-                <table>    
+                <table class='table text-center border-collapse'>    
                 <tr>
-                    <th>Receptionist</th>
-                    <th>Owner</th>
-                    <th>Admin</th>
+                    <th class='th text-center'>Receptionist</th>
+                    <th class='th text-center'>Owner</th>
+                    <th class='th text-center'>Admin</th>
                 </tr>
                 <tr>
-                    <td>{% if user.is_staff %} &#10004 {% endif %} </td>
-                    <td>{% if user.is_owner %} &#10004 {% endif %} </td>
-                    <td>{% if user.is_superuser %} &#10004 {% endif %} </td>
+                    <td class='td text-center'>{% if user.is_staff %} &#10004 {% endif %} </td>
+                    <td class='td text-center'>{% if user.is_owner %} &#10004 {% endif %} </td>
+                    <td class='td text-center'>{% if user.is_superuser %} &#10004 {% endif %} </td>
                 </tr>
                     
                 </table>

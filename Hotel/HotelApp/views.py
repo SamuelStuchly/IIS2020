@@ -15,7 +15,6 @@ from users.models import CustomUser
 
 
 def about(request):
-    print(request)
     return render(request,'HotelApp/about.html')
 
 
@@ -47,7 +46,7 @@ class HotelDetailView(DetailView):
 #TODO:permissons vsade 
 class HotelCreateView(LoginRequiredMixin, CreateView):
     model = Hotel
-    fields = ['name', 'stars', 'rating', 'address', 'city', 'description']
+    fields = ['name', 'stars', 'rating', 'address', 'city', 'description', 'image1', 'image2', 'image3']
 
     def form_valid(self, form):
         
@@ -58,8 +57,7 @@ class HotelCreateView(LoginRequiredMixin, CreateView):
 
 class HotelUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Hotel
-    fields = ['name', 'stars', 'address', 'city', 'description','owner']
-    
+    fields = ['name', 'stars', 'address', 'city', 'description','owner', 'image1', 'image2', 'image3']
 
     def form_valid(self, form):
         # form.instance.owner = self.request.user 
@@ -91,7 +89,7 @@ class RoomDetailView(DetailView):
 #TODO
 class RoomCreateView(LoginRequiredMixin, CreateView):
     model = Room
-    fields = ['number','room_type', 'beds_number', 'price' , 'description']
+    fields = ['number','room_type', 'beds_number', 'price' , 'description', 'image']
 
     def form_valid(self, form):
         form.instance.hotel = Hotel.objects.get(pk=self.kwargs['pk'])
@@ -104,7 +102,7 @@ class RoomCreateView(LoginRequiredMixin, CreateView):
 #TODO
 class RoomUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Room
-    fields = ['number','room_type', 'beds_number', 'price' , 'description', 'occupied']
+    fields = ['number','room_type', 'beds_number', 'price' , 'description', 'occupied', 'image']
 
     def form_valid(self, form):
         # form.instance.hotel.owner = self.request.user

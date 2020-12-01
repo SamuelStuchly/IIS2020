@@ -15,8 +15,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_owner = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    address = models.TextField(verbose_name="address")
-    telephone = PhoneNumberField()
+    address = models.TextField(verbose_name="address", null=True)
+    telephone = PhoneNumberField(null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

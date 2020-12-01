@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+# import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+
+SECRET_KEY = 'p@f+0p7#4rus+uh$84zzs3dmluyf2=6f^x5#7y5&6fi$%_2u3l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['iis2020-hotelapp.herokuapp.com']
+# ALLOWED_HOSTS = ['iis2020-hotelapp.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -46,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'session_security',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -150,5 +154,18 @@ LOGIN_URL = 'login'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# AWS_STORAGE_BUCKET_NAME = 'iis2020'
+
+
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
