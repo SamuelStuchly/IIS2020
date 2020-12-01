@@ -92,7 +92,7 @@ class RoomDetailView(DetailView):
 
 class RoomCreateView(LoginRequiredMixin, CreateView):
     model = Room
-    fields = ['room_type', 'beds_number', 'price' , 'description', 'image']
+    fields = ['room_type', 'beds_number', 'price' , 'description', 'image', 'hotel']
     success_url = '/'
 
     def form_valid(self, form):
@@ -120,7 +120,7 @@ class RoomUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
     def get_success_url(self):
-        return reverse('hotel-detail',kwargs={'pk':self.kwargs['pk']})
+        return reverse('room-detail',kwargs={'pk':self.kwargs['id']})
 
 #TODO
 class RoomDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -162,12 +162,13 @@ class OrderDetailView(DetailView):
 class ReservationCreateView( CreateView,FormView):
     model = Reservation
     fields = ['from_date', 'to_date' ]
+    order = None
  
 
     def form_valid(self, form):
         from_date = form.instance.from_date 
         to_date = form.instance.to_date 
-        form.instance.room = Room.objects.get(pk=self.kwargs['id'])
+        form.instance.room = Room.objects.get(pk=self.kwargs['pk'])
         form.instance.price = form.instance.room.price
         if self.request.user.is_authenticated:
             order_qs = Order.objects.filter(user=self.request.user,active=False)
@@ -177,6 +178,7 @@ class ReservationCreateView( CreateView,FormView):
                 print("TYP",type(order.active))
                 if order.user == self.request.user and not order.active:
                     form.instance.order = order
+                    self.order = form.instance.order
                     return super().form_valid(form)
             else:
                 price = self.calculate_price(form.instance.room,from_date,to_date)
@@ -184,20 +186,21 @@ class ReservationCreateView( CreateView,FormView):
                 print("VYTVARAM OBEJDNAVKU")
                 
                 form.instance.order = Order.objects.create(price=price,deposit=deposit,user=self.request.user,active=False)
-                # order.save()
+                self.order = form.instance.order
         else:
             price = self.calculate_price(form.instance.room,from_date,to_date)
             deposit = price * 0.3
             print("VYTVARAM OBEJDNAVKU")
             
             form.instance.order = Order.objects.create(price=price,deposit=deposit,active=False)
+            self.order = form.instance.order
 
 
         return super().form_valid(form)
     
     def get_success_url(self):
             print("IDEM NA SUCCES URL ")
-            return reverse('order-detail',kwargs={'pk':self.kwargs['pk']})
+            return reverse('order-detail',kwargs={'pk':self.order.id})
     
     
 
@@ -231,7 +234,9 @@ class OrderFinishRegisteredView(LoginRequiredMixin, UserPassesTestMixin, DetailV
 
   
     def get_success_url(self):
-           return reverse('order-succes')
+            order= self.get_object()
+            activate_order(order)
+            return reverse('order-succes')
 
 
 
@@ -262,9 +267,7 @@ class OrderFinishUnRegisteredView(UserPassesTestMixin, UpdateView):
             activate_order(order)
             return reverse('order-success',kwargs={'pk':self.kwargs['pk']})
 
-def activate_order(order):
-    order.active = True
-    order.save()
+
 
 
 
@@ -281,5 +284,11 @@ class OrderDeleteView( UserPassesTestMixin, DeleteView):
            print("IDEM NA SUCCES URL ")
            return reverse('order-list')
 
+
+
 def success(request):
     return render(request,'HotelApp/success.html')
+
+def activate_order(order):
+    order.active = True
+    order.save()

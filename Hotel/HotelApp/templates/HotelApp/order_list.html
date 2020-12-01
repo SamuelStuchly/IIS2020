@@ -34,9 +34,10 @@
                 <h5>Requieried deposit: {{ order.deposit }}</h5>
                 <h5>Status : {{ order.active }}</h5>
                 
+                
               </div>
               <div class="card-footer">
-            
+              <a href="{% url 'order-delete' order.id %}" class="btn btn-danger" >Delete</a>
               </div>
             </div>
           </div>

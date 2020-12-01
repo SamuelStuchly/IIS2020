@@ -110,17 +110,13 @@
         /></a>
         <div class="card-body">
           <h4 class="card-title">
-            <a href="{% url 'room-detail' object.id room.id %}">{{ room.room_type }}</a>
+            <a href="{% url 'room-detail'  room.id %}">{{ room.room_type }}</a>
           </h4>
-          <h5>City: {{ hotel.bedsnumber }}</h5>
-          <h5>Rating: {{ hotel.rating }}/5</h5>
-          <p class="card-text">{{hotel.description}}</p>
+          <h5>beds: {{ room.bedsnumber }}</h5>
+          <h5>Rating: {{ room.rating }}/5</h5>
+          <p class="card-text">{{room.description}}</p>
         </div>
-        <div class="card-footer">
-          {% with ''|center:hotel.stars as range %} {% for i in range %}
-          <small class="text-muted">&#9733;</small>
-          {% endfor %} {% endwith %}
-        </div>
+    
       </div>
     </div>
     {% endfor %}
